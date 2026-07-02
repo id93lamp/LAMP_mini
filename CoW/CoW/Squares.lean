@@ -4,8 +4,7 @@ import CoW.Word
 import CoW.Factor
 import CoW.Period
 
-/-! # CoW.Squares  (LAMP_mini — 0 counted declarations, stub)
-Definition only — no additional lemmas in this mini package. -/
+/-! # CoW.Squares  -/
 
 namespace CoW
 variable {α : Type*}

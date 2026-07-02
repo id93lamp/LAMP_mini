@@ -16,7 +16,6 @@ import CoW.Squares
 Root import file.  Import this to get the full mini library.
 
 > **Note**: This is a reduced subset for the LAMP_mini reviewer package.
-> The full library is in the complete LAMP repository.
 
 ## Module structure
 

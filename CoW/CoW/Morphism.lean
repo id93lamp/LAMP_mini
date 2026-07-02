@@ -4,7 +4,7 @@ import CoW.Word
 import CoW.Factor
 import Mathlib.Data.List.Basic
 
-/-! # CoW.Morphism  (LAMP_mini — 1 declaration, stub) -/
+/-! # CoW.Morphism   -/
 
 namespace CoW
 variable {α β : Type*}

@@ -2,7 +2,7 @@
 
 import CoW.Word
 
-/-! # CoW.Conjugacy  (LAMP_mini — 1 declaration, stub) -/
+/-! # CoW.Conjugacy  -/
 
 namespace CoW
 variable {α : Type*}
