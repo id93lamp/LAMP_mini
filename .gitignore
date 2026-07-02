@@ -1,0 +1,30 @@
+# ── Credentials — never commit ───────────────────────────────────────────────
+.env
+
+# ── Python cache ──────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# ── Lean build artifacts ──────────────────────────────────────────────────────
+CoW/.lake/
+repl/.lake/
+**/.lake/
+*.olean
+*.ilean
+*.trace
+
+# ── Evaluation outputs ────────────────────────────────────────────────────────
+eval_results/
+verified_proofs_mini/
+
+# ── Editor / OS ───────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ── Lean LSP temp files ───────────────────────────────────────────────────────
+CoW/_lsp_query_tmp.lean

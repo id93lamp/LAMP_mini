@@ -1,0 +1,16 @@
+# Python dependencies for LAMP_mini
+# Install with: pip install -r requirements.txt
+
+# ── LLM API clients ───────────────────────────────────────────────────────────
+anthropic>=0.40.0          # Claude API (if PROVER_BACKEND=CLAUDE)
+openai>=1.30.0             # Kimi / DeepSeek (OpenAI-compatible)
+
+# ── MCP (Model Context Protocol) ─────────────────────────────────────────────
+mcp>=1.0.0                 # MCP client session
+lean-explore>=0.1.0        # LeanExplore Mathlib search tool
+lean-lsp-mcp>=0.1.0        # Lean LSP interaction tool
+
+# ── Environment & utilities ───────────────────────────────────────────────────
+python-dotenv>=1.0.0       # Load .env variables
+requests>=2.31.0           # HTTP for Claude direct API calls
+numpy>=1.24.0              # Used by verifier subprocess utilities
