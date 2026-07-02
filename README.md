@@ -2,9 +2,7 @@
 
 > ⚠️ **This is a simplified, stripped-down version of LAMP.**
 > It is **not representative of the system's full capability**, does not include the complete
-> evaluation suite, and omits several production components. For the complete system, evaluation
-> results, and ablation studies.
-
+> evaluation suite, and omits several production components.
 ---
 
 ## What is LAMP?

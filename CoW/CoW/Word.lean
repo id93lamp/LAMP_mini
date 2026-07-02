@@ -1,3 +1,5 @@
+-- Note: This is a simplified, stripped-down version of the CoW library and is not complete.
+
 import Mathlib.Data.List.Basic
 import Mathlib.Data.Nat.Basic
 import Mathlib.Algebra.Group.Defs

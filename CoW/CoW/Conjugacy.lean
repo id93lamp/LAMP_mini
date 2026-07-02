@@ -1,3 +1,5 @@
+-- Note: This is a simplified, stripped-down version of the CoW library and is not complete.
+
 import CoW.Word
 
 /-! # CoW.Conjugacy  (LAMP_mini — 1 declaration, stub) -/
