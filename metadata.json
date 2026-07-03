@@ -5,9 +5,18 @@
     "statement": "Word (α : Type*) := List α",
     "description": "Core representation of a finite word over an alphabet α as a list of symbols.",
     "file": "Word.lean",
-    "tags": ["core", "definition", "word"],
-    "dependencies": ["Mathlib.Data.List.Basic"],
-    "related_concepts": ["Word.empty", "Word.length"],
+    "tags": [
+      "core",
+      "definition",
+      "word"
+    ],
+    "dependencies": [
+      "Mathlib.Data.List.Basic"
+    ],
+    "related_concepts": [
+      "Word.empty",
+      "Word.length"
+    ],
     "category": "Core Ontology",
     "difficulty": "basic"
   },
@@ -17,9 +26,17 @@
     "statement": "Word.empty : Word α := []",
     "description": "The empty word, denoted by ε in literature.",
     "file": "Word.lean",
-    "tags": ["core", "constant", "empty word"],
-    "dependencies": ["Word"],
-    "related_concepts": ["Word.length_empty"],
+    "tags": [
+      "core",
+      "constant",
+      "empty word"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "Word.length_empty"
+    ],
     "category": "Core Ontology",
     "difficulty": "basic"
   },
@@ -29,21 +46,18 @@
     "statement": "Word.length (w : Word α) : ℕ := List.length w",
     "description": "Length of a word, delegating to Mathlib's List.length.",
     "file": "Word.lean",
-    "tags": ["core", "length", "property"],
-    "dependencies": ["Word"],
-    "related_concepts": ["Word.length_empty", "Word.length_concat"],
-    "category": "Core Ontology",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.letter",
-    "type": "definition",
-    "statement": "def Word.letter (a : α) : Word α := [a]",
-    "description": "Single-letter word.",
-    "file": "Word.lean",
-    "tags": ["core", "letter"],
-    "dependencies": ["Word"],
-    "related_concepts": [],
+    "tags": [
+      "core",
+      "length",
+      "property"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "Word.length_empty",
+      "Word.length_concat"
+    ],
     "category": "Core Ontology",
     "difficulty": "basic"
   },
@@ -53,9 +67,18 @@
     "statement": "Word.concat (u v : Word α) : Word α := u ++ v",
     "description": "Concatenation of two words u and v. Denoted by the infix notation ⬝.",
     "file": "Word.lean",
-    "tags": ["core", "operation", "concatenation"],
-    "dependencies": ["Word"],
-    "related_concepts": ["Word.length_concat", "Monoid"],
+    "tags": [
+      "core",
+      "operation",
+      "concatenation"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "Word.length_concat",
+      "Monoid"
+    ],
     "category": "Core Operations",
     "difficulty": "basic"
   },
@@ -65,141 +88,38 @@
     "statement": "lemma Word.length_concat (u v : Word α) : (u ⬝ v).length = u.length + v.length",
     "description": "The length of the concatenation of two words is the sum of their lengths.",
     "file": "Word.lean",
-    "tags": ["length", "concatenation", "property"],
-    "dependencies": ["Word.concat", "Word.length"],
+    "tags": [
+      "length",
+      "concatenation",
+      "property"
+    ],
+    "dependencies": [
+      "Word.concat",
+      "Word.length"
+    ],
     "related_concepts": [],
     "category": "Basic Properties",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.concat_empty_right",
-    "type": "lemma",
-    "statement": "lemma Word.concat_empty_right (w : Word α) : w ⬝ Word.empty = w",
-    "description": "Concatenating the empty word on the right has no effect.",
-    "file": "Word.lean",
-    "tags": ["concatenation", "empty word"],
-    "dependencies": ["Word.concat", "Word.empty"],
-    "related_concepts": [],
-    "category": "Basic Properties",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.concat_empty_left",
-    "type": "lemma",
-    "statement": "lemma Word.concat_empty_left (w : Word α) : Word.empty ⬝ w = w",
-    "description": "Concatenating the empty word on the left has no effect.",
-    "file": "Word.lean",
-    "tags": ["concatenation", "empty word"],
-    "dependencies": ["Word.concat", "Word.empty"],
-    "related_concepts": [],
-    "category": "Basic Properties",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.concat_assoc",
-    "type": "lemma",
-    "statement": "lemma Word.concat_assoc (u v w : Word α) : (u ⬝ v) ⬝ w = u ⬝ (v ⬝ w)",
-    "description": "Word concatenation is associative.",
-    "file": "Word.lean",
-    "tags": ["concatenation", "associativity"],
-    "dependencies": ["Word.concat"],
-    "related_concepts": [],
-    "category": "Basic Properties",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Monoid",
-    "type": "instance",
-    "statement": "instance : Monoid (Word α)",
-    "description": "Words form a monoid under concatenation.",
-    "file": "Word.lean",
-    "tags": ["monoid", "algebraic structure"],
-    "dependencies": ["Word.concat", "Word.empty", "Word.concat_assoc"],
-    "related_concepts": [],
-    "category": "Algebraic Structures",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.mul_eq_concat",
-    "type": "lemma",
-    "statement": "lemma Word.mul_eq_concat (u v : Word α) : u * v = u ⬝ v",
-    "description": "Multiplication in the Word monoid is equivalent to concatenation.",
-    "file": "Word.lean",
-    "tags": ["monoid", "multiplication"],
-    "dependencies": ["Monoid"],
-    "related_concepts": [],
-    "category": "Algebraic Structures",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.one_eq_empty",
-    "type": "lemma",
-    "statement": "lemma Word.one_eq_empty : (1 : Word α) = Word.empty",
-    "description": "The unit element 1 in the monoid is the empty word.",
-    "file": "Word.lean",
-    "tags": ["monoid", "unit"],
-    "dependencies": ["Monoid"],
-    "related_concepts": [],
-    "category": "Algebraic Structures",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.pow_zero",
-    "type": "lemma",
-    "statement": "lemma Word.pow_zero (w : Word α) : w ^ 0 = Word.empty",
-    "description": "Any word raised to power 0 is the empty word.",
-    "file": "Word.lean",
-    "tags": ["power"],
-    "dependencies": ["Monoid"],
-    "related_concepts": [],
-    "category": "Algebraic Structures",
-    "difficulty": "basic"
-  },
-  {
-    "name": "Word.pow_succ",
-    "type": "lemma",
-    "statement": "lemma Word.pow_succ (w : Word α) (n : ℕ) : w ^ (n + 1) = w ^ n ⬝ w",
-    "description": "Inductive step for word power definition.",
-    "file": "Word.lean",
-    "tags": ["power"],
-    "dependencies": ["Monoid"],
-    "related_concepts": [],
-    "category": "Algebraic Structures",
     "difficulty": "basic"
   },
   {
     "name": "IsPrefix",
     "type": "definition",
     "statement": "def IsPrefix (u w : Word α) : Prop := List.IsPrefix u w",
-    "description": "Predicate stating that u is a prefix of w. Denoted by u ≤ₚ w.",
+    "description": "Predicate stating that u is a prefix of w (w = u ++ v for some v). Denoted by u ≤ₚ w.",
     "file": "Factor.lean",
-    "tags": ["factor", "prefix", "predicate"],
-    "dependencies": ["Word"],
-    "related_concepts": ["IsProperPrefix", "IsSuffix", "IsFactor"],
-    "category": "Factor Theory",
-    "difficulty": "basic"
-  },
-  {
-    "name": "IsPrefix.def",
-    "type": "lemma",
-    "statement": "lemma IsPrefix.def (u w : Word α) : (u ≤ₚ w) ↔ ∃ v, w = u ++ v",
-    "description": "Definition of prefix using list append.",
-    "file": "Factor.lean",
-    "tags": ["factor", "prefix"],
-    "dependencies": ["IsPrefix"],
-    "related_concepts": [],
-    "category": "Factor Theory",
-    "difficulty": "basic"
-  },
-  {
-    "name": "IsPrefix.length_le",
-    "type": "lemma",
-    "statement": "lemma IsPrefix.length_le {u w : Word α} (h : u ≤ₚ w) : u.length ≤ w.length",
-    "description": "A prefix of a word has length less than or equal to the word's length.",
-    "file": "Factor.lean",
-    "tags": ["prefix", "length"],
-    "dependencies": ["IsPrefix"],
-    "related_concepts": [],
+    "tags": [
+      "factor",
+      "prefix",
+      "predicate"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "IsProperPrefix",
+      "IsSuffix",
+      "IsFactor"
+    ],
     "category": "Factor Theory",
     "difficulty": "basic"
   },
@@ -207,23 +127,21 @@
     "name": "IsSuffix",
     "type": "definition",
     "statement": "def IsSuffix (u w : Word α) : Prop := List.IsSuffix u w",
-    "description": "Predicate stating that u is a suffix of w. Denoted by u ≤ₛ w.",
+    "description": "Predicate stating that u is a suffix of w (w = v ++ u for some v). Denoted by u ≤ₛ w.",
     "file": "Factor.lean",
-    "tags": ["factor", "suffix", "predicate"],
-    "dependencies": ["Word"],
-    "related_concepts": ["IsProperSuffix", "IsPrefix", "IsFactor"],
-    "category": "Factor Theory",
-    "difficulty": "basic"
-  },
-  {
-    "name": "IsSuffix.def",
-    "type": "lemma",
-    "statement": "lemma IsSuffix.def (u w : Word α) : (u ≤ₛ w) ↔ ∃ v, w = v ++ u",
-    "description": "Definition of suffix using list append.",
-    "file": "Factor.lean",
-    "tags": ["factor", "suffix"],
-    "dependencies": ["IsSuffix"],
-    "related_concepts": [],
+    "tags": [
+      "factor",
+      "suffix",
+      "predicate"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "IsProperSuffix",
+      "IsPrefix",
+      "IsFactor"
+    ],
     "category": "Factor Theory",
     "difficulty": "basic"
   },
@@ -231,11 +149,20 @@
     "name": "IsFactor",
     "type": "definition",
     "statement": "def IsFactor (u w : Word α) : Prop := ∃ x y : Word α, w = x ++ u ++ y",
-    "description": "Predicate stating that u is a contiguous factor of w. Denoted by u ≤f w.",
+    "description": "Predicate stating that u is a contiguous subword (factor) of w. Denoted by u ≤f w.",
     "file": "Factor.lean",
-    "tags": ["factor", "subword", "predicate"],
-    "dependencies": ["Word"],
-    "related_concepts": ["IsPrefix", "IsSuffix"],
+    "tags": [
+      "factor",
+      "subword",
+      "predicate"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "IsPrefix",
+      "IsSuffix"
+    ],
     "category": "Factor Theory",
     "difficulty": "basic"
   },
@@ -245,45 +172,17 @@
     "statement": "def IsProperPrefix (u w : Word α) : Prop := u ≤ₚ w ∧ u ≠ w",
     "description": "Predicate stating that u is a prefix of w and is not equal to w. Denoted by u <ₚ w.",
     "file": "ProperPrefix.lean",
-    "tags": ["prefix", "proper", "predicate"],
-    "dependencies": ["IsPrefix"],
-    "related_concepts": ["IsPrefix"],
-    "category": "Factor Theory",
-    "difficulty": "basic"
-  },
-  {
-    "name": "IsProperPrefix.def",
-    "type": "lemma",
-    "statement": "lemma IsProperPrefix.def (u w : Word α) : (u <ₚ w) ↔ ∃ v, w = u ++ v ∧ v ≠ []",
-    "description": "Definition of proper prefix using non-empty remainder.",
-    "file": "ProperPrefix.lean",
-    "tags": ["prefix", "proper"],
-    "dependencies": ["IsProperPrefix"],
-    "related_concepts": [],
-    "category": "Factor Theory",
-    "difficulty": "basic"
-  },
-  {
-    "name": "IsProperSuffix",
-    "type": "definition",
-    "statement": "def IsProperSuffix (u w : Word α) : Prop := u ≤ₛ w ∧ u ≠ w",
-    "description": "Predicate stating that u is a suffix of w and is not equal to w. Denoted by u <ₛ w.",
-    "file": "ProperSuffix.lean",
-    "tags": ["suffix", "proper", "predicate"],
-    "dependencies": ["IsSuffix"],
-    "related_concepts": ["IsSuffix"],
-    "category": "Factor Theory",
-    "difficulty": "basic"
-  },
-  {
-    "name": "IsProperSuffix.iff",
-    "type": "lemma",
-    "statement": "lemma IsProperSuffix.iff (u w : Word α) : (u <ₛ w) ↔ ∃ v, w = v ++ u ∧ v ≠ []",
-    "description": "Definition of proper suffix using non-empty remainder.",
-    "file": "ProperSuffix.lean",
-    "tags": ["suffix", "proper"],
-    "dependencies": ["IsProperSuffix"],
-    "related_concepts": [],
+    "tags": [
+      "prefix",
+      "proper",
+      "predicate"
+    ],
+    "dependencies": [
+      "IsPrefix"
+    ],
+    "related_concepts": [
+      "IsPrefix"
+    ],
     "category": "Factor Theory",
     "difficulty": "basic"
   },
@@ -293,23 +192,42 @@
     "statement": "def IsBorder (b w : Word α) : Prop := b <ₚ w ∧ b <ₛ w",
     "description": "A border of w is a word that is simultaneously a proper prefix and a proper suffix of w.",
     "file": "Border.lean",
-    "tags": ["border", "prefix", "suffix", "predicate"],
-    "dependencies": ["IsProperPrefix", "IsProperSuffix"],
-    "related_concepts": [],
+    "tags": [
+      "border",
+      "prefix",
+      "suffix",
+      "predicate"
+    ],
+    "dependencies": [
+      "IsProperPrefix",
+      "IsProperSuffix"
+    ],
+    "related_concepts": [
+      "IsUnbordered",
+      "IsLongestBorder"
+    ],
     "category": "Border Theory",
     "difficulty": "intermediate"
   },
   {
-    "name": "IsPrimitive",
+    "name": "IsUnbordered",
     "type": "definition",
-    "statement": "def IsPrimitive (w : Word α) : Prop := w ≠ [] ∧ ¬ ∃ (u : Word α) (k : ℕ), k ≥ 2 ∧ w = u ^ k",
-    "description": "A word is primitive if it is non-empty and cannot be expressed as a power of another word with exponent k ≥ 2.",
-    "file": "Period.lean",
-    "tags": ["primitivity", "power", "predicate"],
-    "dependencies": ["Word", "Word.pow_succ"],
-    "related_concepts": [],
-    "category": "Periodicity",
-    "difficulty": "advanced"
+    "statement": "def IsUnbordered (w : Word α) : Prop := ∀ b, IsBorder b w → b = []",
+    "description": "A word is unbordered if it has no border (excluding the empty word as a border for non-empty words).",
+    "file": "Border.lean",
+    "tags": [
+      "border",
+      "unbordered",
+      "property"
+    ],
+    "dependencies": [
+      "IsBorder"
+    ],
+    "related_concepts": [
+      "IsBorder"
+    ],
+    "category": "Border Theory",
+    "difficulty": "intermediate"
   },
   {
     "name": "IsConjugate",
@@ -317,9 +235,17 @@
     "statement": "def IsConjugate (u v : Word α) : Prop := ∃ x y : Word α, u = x ⬝ y ∧ v = y ⬝ x",
     "description": "Two words are conjugate if one is a cyclic shift of the other. Denoted by u ~ v.",
     "file": "Conjugacy.lean",
-    "tags": ["conjugacy", "cyclic shift", "equivalence"],
-    "dependencies": ["Word.concat"],
-    "related_concepts": [],
+    "tags": [
+      "conjugacy",
+      "cyclic shift",
+      "equivalence"
+    ],
+    "dependencies": [
+      "Word.concat"
+    ],
+    "related_concepts": [
+      "Commutativity"
+    ],
     "category": "Conjugacy",
     "difficulty": "intermediate"
   },
@@ -329,11 +255,101 @@
     "statement": "def applyMorphism (f : α → Word β) (w : Word α) : Word β := w.flatMap f",
     "description": "Applies a morphism f (defined by letter mappings) to a word w by concatenating the images of its letters.",
     "file": "Morphism.lean",
-    "tags": ["morphism", "homomorphism", "operation"],
-    "dependencies": ["Word"],
-    "related_concepts": [],
+    "tags": [
+      "morphism",
+      "homomorphism",
+      "operation"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "IsUniform",
+      "IsCoding"
+    ],
     "category": "Morphisms",
     "difficulty": "intermediate"
+  },
+  {
+    "name": "IsUniform",
+    "type": "definition",
+    "statement": "def IsUniform (f : α → Word β) (k : ℕ) : Prop := ∀ a : α, (f a).length = k",
+    "description": "A morphism is uniform of length k if every letter maps to a word of exactly length k.",
+    "file": "Morphism.lean",
+    "tags": [
+      "morphism",
+      "uniform",
+      "property"
+    ],
+    "dependencies": [
+      "applyMorphism",
+      "Word.length"
+    ],
+    "related_concepts": [
+      "IsCoding"
+    ],
+    "category": "Morphisms",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "HasPeriod",
+    "type": "definition",
+    "statement": "def HasPeriod (w : Word α) (p : ℕ) : Prop := 0 < p ∧ ∀ i : ℕ, i + p < w.length → w.get? i = w.get? (i + p)",
+    "description": "Predicate stating that w has period p if characters at distance p are identical for all valid indices.",
+    "file": "Period.lean",
+    "tags": [
+      "period",
+      "periodicity",
+      "predicate"
+    ],
+    "dependencies": [
+      "Word",
+      "Word.length"
+    ],
+    "related_concepts": [
+      "IsMinimalPeriod"
+    ],
+    "category": "Periodicity",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "IsPrimitive",
+    "type": "definition",
+    "statement": "def IsPrimitive (w : Word α) : Prop := w ≠ [] ∧ ¬ ∃ (u : Word α) (k : ℕ), k ≥ 2 ∧ w = u ^ k",
+    "description": "A word is primitive if it is non-empty and cannot be expressed as a power of another word with exponent k ≥ 2.",
+    "file": "Period.lean",
+    "tags": [
+      "primitivity",
+      "power",
+      "predicate"
+    ],
+    "dependencies": [
+      "Word",
+      "Word.pow_succ"
+    ],
+    "related_concepts": [],
+    "category": "Periodicity",
+    "difficulty": "advanced"
+  },
+  {
+    "name": "Word.factors",
+    "type": "definition",
+    "statement": "def Word.factors (w : Word α) : List (Word α) := (List.range w.length).flatMap fun i => (List.range (w.length - i)).map fun len => w.drop i |>.take (len + 1)",
+    "description": "Computes the list of all contiguous subwords (factors) of a word.",
+    "file": "Squares.lean",
+    "tags": [
+      "factor",
+      "computable",
+      "list"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "IsFactor"
+    ],
+    "category": "Factor Theory",
+    "difficulty": "basic"
   },
   {
     "name": "IsSquare",
@@ -341,10 +357,211 @@
     "statement": "def IsSquare (s : Word α) : Prop := ∃ u : Word α, u ≠ [] ∧ s = u ++ u",
     "description": "Predicate stating that a word is a square (of the form uu for some non-empty u).",
     "file": "Squares.lean",
-    "tags": ["square", "repetition", "predicate"],
-    "dependencies": ["Word"],
-    "related_concepts": [],
+    "tags": [
+      "square",
+      "repetition",
+      "predicate"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "squareRoot",
+      "IsPrimRootedSquare"
+    ],
     "category": "Repetitions",
     "difficulty": "basic"
+  },
+  {
+    "name": "squareRoot",
+    "type": "definition",
+    "statement": "noncomputable def squareRoot (s : Word α) (h : IsSquare s) : Word α := Classical.choose h",
+    "description": "Extracts the root word u from a square s.",
+    "file": "Squares.lean",
+    "tags": [
+      "square",
+      "root",
+      "extraction"
+    ],
+    "dependencies": [
+      "IsSquare"
+    ],
+    "related_concepts": [],
+    "category": "Repetitions",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "IsPrimRootedSquare",
+    "type": "definition",
+    "statement": "def IsPrimRootedSquare (s : Word α) : Prop := ∃ u : Word α, IsPrimitive u ∧ s = u ++ u",
+    "description": "A primitively rooted square is a square whose root is a primitive word.",
+    "file": "Squares.lean",
+    "tags": [
+      "square",
+      "primitive",
+      "predicate"
+    ],
+    "dependencies": [
+      "IsPrimitive"
+    ],
+    "related_concepts": [
+      "IsSquare"
+    ],
+    "category": "Repetitions",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "distinctSquares",
+    "type": "definition",
+    "statement": "noncomputable def distinctSquares (w : Word α) : Finset (Word α) := (w.factors.toFinset).filter (fun s => IsSquare s)",
+    "description": "The set of all distinct squares that occur as factors within a word w.",
+    "file": "Squares.lean",
+    "tags": [
+      "square",
+      "finset",
+      "distinct"
+    ],
+    "dependencies": [
+      "Word.factors",
+      "IsSquare"
+    ],
+    "related_concepts": [
+      "numDistinctSquares"
+    ],
+    "category": "Combinatorics",
+    "difficulty": "advanced"
+  },
+  {
+    "name": "numDistinctSquares",
+    "type": "definition",
+    "statement": "noncomputable def numDistinctSquares (w : Word α) : ℕ := (distinctSquares w).card",
+    "description": "The number of distinct squares occurring in a word. Core metric for the Fraenkel-Simpson conjecture.",
+    "file": "Squares.lean",
+    "tags": [
+      "square",
+      "count",
+      "metric"
+    ],
+    "dependencies": [
+      "distinctSquares"
+    ],
+    "related_concepts": [],
+    "category": "Combinatorics",
+    "difficulty": "advanced"
+  },
+  {
+    "name": "alphabet",
+    "type": "definition",
+    "statement": "noncomputable def alphabet (w : Word α) : Finset α := w.toFinset",
+    "description": "The finite set of unique characters (alphabet) actually occurring in the word.",
+    "file": "Squares.lean",
+    "tags": [
+      "alphabet",
+      "finset",
+      "core"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "alphabetSize"
+    ],
+    "category": "Core Ontology",
+    "difficulty": "basic"
+  },
+  {
+    "name": "alphabetSize",
+    "type": "definition",
+    "statement": "noncomputable def alphabetSize (w : Word α) : ℕ := (alphabet w).card",
+    "description": "The number of distinct characters in a word.",
+    "file": "Squares.lean",
+    "tags": [
+      "alphabet",
+      "count",
+      "metric"
+    ],
+    "dependencies": [
+      "alphabet"
+    ],
+    "related_concepts": [
+      "IsBinary"
+    ],
+    "category": "Core Ontology",
+    "difficulty": "basic"
+  },
+  {
+    "name": "ThreePrimSquaresAt",
+    "type": "definition",
+    "statement": "def ThreePrimSquaresAt (w : Word α) (i a b c : ℕ) : Prop := ...",
+    "description": "Predicate stating three primitively rooted squares of lengths 2a, 2b, and 2c start at position i in w.",
+    "file": "Squares.lean",
+    "tags": [
+      "square",
+      "position",
+      "lemma helper"
+    ],
+    "dependencies": [
+      "IsPrimRootedSquare"
+    ],
+    "related_concepts": [],
+    "category": "Repetitions",
+    "difficulty": "advanced"
+  },
+  {
+    "name": "IsBinary",
+    "type": "definition",
+    "statement": "def IsBinary (w : Word α) : Prop := alphabetSize w ≤ 2",
+    "description": "Predicate stating a word is binary (uses at most 2 distinct letters).",
+    "file": "Squares.lean",
+    "tags": [
+      "binary",
+      "alphabet",
+      "predicate"
+    ],
+    "dependencies": [
+      "alphabetSize"
+    ],
+    "related_concepts": [],
+    "category": "Combinatorics",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "IsKPower",
+    "type": "definition",
+    "statement": "def IsKPower (s : Word α) (k : ℕ) : Prop := k ≥ 2 ∧ ∃ u : Word α, u ≠ [] ∧ s = (List.replicate k u).flatten",
+    "description": "Predicate stating a word is a k-power (k repetitions of some non-empty root u).",
+    "file": "Squares.lean",
+    "tags": [
+      "power",
+      "repetition",
+      "predicate"
+    ],
+    "dependencies": [
+      "Word"
+    ],
+    "related_concepts": [
+      "numDistinctKPowers"
+    ],
+    "category": "Repetitions",
+    "difficulty": "intermediate"
+  },
+  {
+    "name": "numDistinctKPowers",
+    "type": "definition",
+    "statement": "noncomputable def numDistinctKPowers (w : Word α) (k : ℕ) : Finset (Word α) := (w.factors.toFinset).filter (fun s => IsKPower s k)",
+    "description": "The set of all distinct k-powers occurring in a word w.",
+    "file": "Squares.lean",
+    "tags": [
+      "power",
+      "distinct",
+      "metric"
+    ],
+    "dependencies": [
+      "Word.factors",
+      "IsKPower"
+    ],
+    "related_concepts": [],
+    "category": "Combinatorics",
+    "difficulty": "advanced"
   }
 ]

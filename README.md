@@ -1,14 +1,16 @@
-# LAMP_mini - A stripped down version of LAMP
+# LAMP_mini
 
-> ⚠️ **This is a simplified, stripped-down version of LAMP.**
-> It is **not representative of the system's full capability**, does not include the complete
-> evaluation suite, and omits several production components.
+> ⚠️ **The LAMP framework code in this repository is a stripped-down version.**
+> The orchestration pipeline (Planner → Builder → Verifier) is simplified for portability.
+> However, **the CoW Lean library, the 90-theorem evaluation suite, and the raw evaluation logs
+> are released in full** (see the sections below for details).
+
 ---
 
 ## What is LAMP?
 
-**LAMP** (Lean-based Agentic Framework with MCP and Proof Repair) is an automated theorem proving system for Lean 4
-that operates on the **Combinatorics on Words (CoW)** domain. It uses a three-agent pipeline:
+**LAMP** (Lean-based Agentic Framework with MCP and Proof Repair) is an automated theorem proving
+system for Lean 4 operating on the **Combinatorics on Words (CoW)** domain. It uses a three-agent pipeline:
 
 ```
 Theorem + sorry
@@ -31,28 +33,29 @@ Theorem + sorry
    ✅ Proved  /  ❌ Re-plan (up to max_replans)
 ```
 
-The key innovation is **CoW library grounding**: the Planner and Builder are given the full
-source of the CoW Lean library as context, allowing them to reference existing lemmas by name
-rather than re-deriving them.
+The key innovation is **CoW library grounding**: the Planner and Builder are given the full source
+of the CoW Lean library as context, allowing them to reference existing lemmas by name rather than
+re-deriving them.
 
 ---
 
-## What is included / excluded in this package
+## What is included in this release
 
 | Component | Status | Notes |
 |---|---|---|
-| Orchestrator (Planner→Builder→Verifier loop) | ✅ Full | `orchestrator.py` |
-| Planner Agent | ✅ Full | `planner.py` |
-| Builder Agent | ✅ Full | `builder.py` |
-| Lean REPL Verifier | ✅ Full | `verifier.py` - attributed below |
-| MCP Tool interfaces | ✅ Full | `mcp_tools.py` |
-| LLM backends: Claude, Kimi, DeepSeek | ✅ Full | `llm/` |
-| CoW Lean Library (9 modules) | ✅ Subset | 29 declarations total (see CoW Library section) |
-| 5-theorem benchmark | ✅ Included | `benchmark.py` |
-| Full 90-theorem evaluation suite | ❌ Omitted | See paper for results |
-| Ablation studies | ❌ Omitted | See paper for results |
+| Orchestrator (Planner→Builder→Verifier loop) | ✅ Mini | Simplified single-threaded version (`orchestrator.py`) |
+| Planner Agent | ✅ Mini | `planner.py` |
+| Builder Agent | ✅ Mini | `builder.py` |
+| Lean REPL Verifier | ✅ Mini | `verifier.py` (attributed below) |
+| MCP Tool interfaces | ✅ Mini | `mcp_tools.py` |
+| LLM backends: Claude, Kimi, DeepSeek | ✅ Mini | `llm/` |
+| CoW Lean Library (8 modules, 93 declarations) | ✅ **Full Release** | See [CoW Library](#cow-library) section |
+| CoW Semantic Ontology (`metadata.json`) | ✅ **Full Release** | Definitions covering all modules |
+| 90-Theorem Evaluation Suite (`evaluation_suite.json`) | ✅ **Full Release** | See [Evaluation Suite](#evaluation-suite) section |
+| Raw Evaluation Logs (CoW & MiniF2F) | ✅ **Full Release** | Part of the full LAMP system; contains logs of the numbers reported in the paper (all 3 models under `logs/`) |
+| 5-theorem mini benchmark | ✅ Included | `benchmark.py` |
+| Ablation studies (full) | ❌ Omitted | See paper for results |
 | Parallel Lean worker scheduler | ❌ Omitted | Single-threaded only |
-| CoW semantic ontology (`metadata.json`) | ✅ Subset | 29 declarations (matching the library subset) |
 
 ---
 
@@ -86,7 +89,8 @@ Follow these step-by-step instructions to set up the environment and build the n
 
 ### 1. Install Lean 4 via elan
 
-`elan` is the Lean toolchain manager. It will automatically download and manage the correct Lean version (v4.17.0) specified in the project's `lean-toolchain` files.
+`elan` is the Lean toolchain manager. It will automatically download and manage the correct Lean
+version (v4.17.0) specified in the project's `lean-toolchain` files.
 
 ```bash
 # Install elan (Lean toolchain manager)
@@ -103,7 +107,8 @@ lake --version
 
 ### 2. Set Up Python Virtual Environment
 
-Since the MCP tools (`lean-explore` and `lean-lsp-mcp`) are run from the command-line, setting up and activating a virtual environment is required so they are placed in your `PATH`.
+Since the MCP tools (`lean-explore` and `lean-lsp-mcp`) are run from the command-line, setting up
+and activating a virtual environment is required so they are placed in your `PATH`.
 
 ```bash
 # Create a virtual environment
@@ -123,7 +128,6 @@ The verifier calls the Lean REPL via a subprocess. It must be cloned and built l
 
 ```bash
 cd repl
-# Build the REPL executable
 lake build
 cd ..
 ```
@@ -138,7 +142,8 @@ lake build
 cd ..
 ```
 
-> ⏱️ **Note**: First-time build downloads Mathlib (~1 GB) and may take 10–30 minutes depending on your internet connection and CPU. Subsequent builds are incremental.
+> ⏱️ **Note**: First-time build downloads Mathlib (~1 GB) and may take 10–30 minutes depending on
+> your internet connection and CPU. Subsequent builds are incremental.
 
 ### 5. Configure API Keys
 
@@ -146,7 +151,7 @@ cd ..
 cp .env.example .env
 ```
 
-Edit `.env` and fill in **one** of the API keys for the backend you wish to use, and set `PROVER_BACKEND` accordingly:
+Edit `.env` and fill in **one** of the API keys for the backend you wish to use:
 
 ```ini
 # Choose your backend (CLAUDE, KIMI, or DEEPSEEK)
@@ -165,11 +170,13 @@ PROVER_MODE=cow
 
 ## How to Run
 
-Ensure your Python virtual environment is activated (`source .venv/bin/activate`) and Lean environment is loaded (`source ~/.elan/env`) before running the scripts.
+Ensure your Python virtual environment is activated (`source .venv/bin/activate`) and the Lean
+environment is loaded (`source ~/.elan/env`) before running.
 
 ### 1. Quick Start (3 Theorems)
 
-Run the quick-start demo which executes 3 theorems (Easy, Medium, and Hard) through the full proving pipeline:
+Run the quick-start demo which executes 3 theorems (Easy, Medium, and Hard) through the full
+proving pipeline:
 
 ```bash
 python run_example.py
@@ -179,14 +186,12 @@ Expected output:
 ```
 ════════════════════════════════════════════════════════════════
   LAMP_mini - Quick-Start Example
-  (This is a reduced demo. See paper for full system results.)
 ════════════════════════════════════════════════════════════════
 
 [1/3] word_length_eq_zero_iff  [EASY]
       A word has length 0 iff it is the empty list.
 ─────────────────────────────────────────────────────────────────
 [Planner] Reasoning: ...
-[Planner] Plan: ...
 [Builder] ...
 [Orchestrator] ✅ Proof verified after patch!
 
@@ -198,7 +203,7 @@ Expected output:
 
 ### 2. Full Mini Benchmark (5 Theorems)
 
-Run the benchmark suite covering all 5 selected representative theorems:
+Run the benchmark suite covering 5 representative theorems:
 
 ```bash
 python benchmark.py
@@ -217,33 +222,57 @@ The benchmark covers **2 Easy · 2 Medium · 1 Hard** theorems across 4 CoW modu
 Results are saved to `eval_results/lamp_mini_benchmark_<timestamp>.json`.
 Proved theorems are saved as `.lean` files in `verified_proofs_mini/`.
 
-> ⚠️ This mini benchmark (5 theorems) is **not** comparable to the full evaluation (90 theorems) reported in the paper. Pass rates here will differ from paper results due to the smaller and different distribution of theorems, and reduced retry budgets.
+> ⚠️ This mini benchmark (5 theorems) is **not** comparable to the full evaluation (90 theorems).
+> See `logs/` for the raw logs of the full evaluation runs reported in the paper.
 
 ---
 
 ## CoW Library
 
-The `CoW/` directory contains a **Lean 4 Combinatorics on Words library** developed as part of
-this research. It is organized as a Lean 4 package with Mathlib as a dependency.
+The `CoW/` directory contains the **full Lean 4 Combinatorics on Words library** developed as part of this research. It is a **complete release** (not a subset). The library is organized as a Lean 4 package with Mathlib as a dependency.
 
-### Modules and Declarations
+For detailed architecture, custom notations, and the module-by-module declaration summary, please see **[CoW.md](CoW.md)**.
 
-| Module | Status | Key Declarations / Concepts |
-|---|---|---|
-| `Word` | ✅ Subset | `Word α`, `Word.concat` (`⬝`), `Word.length`, `Word.pow_succ`, `Monoid` |
-| `Factor` | ✅ Subset | `IsPrefix` (`≤ₚ`), `IsSuffix` (`≤ₛ`), `IsFactor` (`≤f`) |
-| `ProperPrefix` | ✅ Subset | `IsProperPrefix` (`<ₚ`), `IsProperPrefix.def` |
-| `ProperSuffix` | ✅ Subset | `IsProperSuffix` (`<ₛ`), `IsProperSuffix.iff` |
-| `Border` | ✅ Subset | `IsBorder` |
-| `Period` | ✅ Subset | `IsPrimitive` |
-| `Conjugacy` | ✅ Subset | `IsConjugate` definition |
-| `Morphism` | ✅ Subset | `applyMorphism` (`•w`) |
-| `Squares` | ✅ Subset | `IsSquare` definition |
+---
 
-The full modules (including `IsCoding`, `IsUniform`, `compMorphism`, `conjugate_trans`, etc.) are in the complete LAMP repository.
+## Evaluation Suite
 
-**Declaration count**: **29 total** across all 9 modules  - well within the
-foundational subset the 5 benchmark theorems need to compile and run.
+### `evaluation_suite.json`
+
+The **full 90-theorem evaluation suite** used in the paper is released as `evaluation_suite.json`. Each entry encodes the theorem name, difficulty, module, formal Lean 4 statement, and a `sorry`-filled skeleton ready for the prover.
+
+For a detailed distribution table and an annotated, human-readable overview of all 90 theorems, please see **[Cow_Evaluation_suite_theorem_reference.md](Cow_Evaluation_suite_theorem_reference.md)**.
+
+### `metadata.json`
+
+`metadata.json` encodes the **full CoW semantic ontology** (the definitions spanning all modules) with structured fields for each declaration (statement, description, tags, dependencies, related concepts, category, and difficulty). This is the ontology queried by the `get_cow_definition` and related MCP tools at runtime.
+
+---
+
+## Raw Evaluation Logs
+
+The `logs/` directory contains the **complete raw logs** from all evaluation runs reported in the
+paper, organized by model:
+
+```
+logs/
+├── Claude/
+│   ├── log_cow_batch1_claude.txt    # CoW suite: theorems 1-45 (Claude)
+│   ├── log_cow_batch2_claude.txt    # CoW suite: theorems 46-90 (Claude)
+│   └── log_minif2f_claude.txt       # MiniF2F benchmark (Claude)
+├── Kimi/
+│   ├── log_cow_batch1_kimi.txt      # CoW suite: theorems 1-45 (Kimi)
+│   ├── log_cow_batch2_kimi.txt      # CoW suite: theorems 46-90 (Kimi)
+│   └── log_minif2f_kimi.txt         # MiniF2F benchmark (Kimi)
+└── Deepseek/
+    ├── log_cow_batch1_deepseek.txt  # CoW suite: theorems 1-45 (DeepSeek)
+    ├── log_cow_batch2_deepseek.txt  # CoW suite: theorems 46-90 (DeepSeek)
+    └── log_minif2f_deepseek.txt     # MiniF2F benchmark (DeepSeek)
+```
+
+> **Note**: The CoW evaluation suite run was split into two batches of 45 theorems each (Batch 1:
+> theorems 1–45, Batch 2: theorems 46–90) for practical scheduling reasons. The logs for each
+> batch are kept separate per model. The MiniF2F logs were run in a single pass per model.
 
 ---
 
@@ -253,7 +282,7 @@ The Builder has access to 5 tools via the Model Context Protocol:
 
 | Tool | Description |
 |---|---|
-| `get_cow_definition` | Looks up a CoW lemma/definition by name from the local ontology |
+| `get_cow_definition` | Looks up a CoW lemma/definition by name from the local ontology (`metadata.json`) |
 | `search_lean_explore` | BM25 search over Mathlib (last resort for Mathlib lemmas) |
 | `get_theorem_family` | Finds related theorems in the same conceptual family |
 | `get_prerequisites` | Finds prerequisite theorems from the ontology |
@@ -261,6 +290,67 @@ The Builder has access to 5 tools via the Model Context Protocol:
 
 Tool credentials are read from `.env` only (no hardcoded endpoints).
 The LSP and ontology tools are purely local.
+
+---
+
+## Project Structure
+
+```
+LAMP_mini/
+├── README.md                               # This file
+├── CoW.md                                  # Full CoW library documentation
+├── Cow_Evaluation_suite_theorem_reference.md  # Annotated list of all 90 theorems
+├── .env.example                            # API key template (copy to .env)
+├── .gitignore
+├── requirements.txt
+│
+├── orchestrator.py        # Planner → Builder → Verifier loop (mini)
+├── planner.py             # Strategic reasoning agent (mini)
+├── builder.py             # Lean 4 code generation agent (mini)
+├── verifier.py            # Lean REPL verifier (adopted from DeepSeek)
+├── mcp_tools.py           # Tool schemas and MCP client wrappers (mini)
+│
+├── llm/
+│   ├── claude.py          # Anthropic Claude backend
+│   ├── kimi.py            # Moonshot Kimi K2 backend
+│   └── deepseek.py        # DeepSeek backend
+│
+├── CoW/                   # ★ Full Lean 4 CoW library (complete release)
+│   ├── lakefile.toml
+│   ├── lean-toolchain     # Pins Lean 4 v4.17.0
+│   ├── CoW.lean           # Root import
+│   └── CoW/
+│       ├── Word.lean
+│       ├── Factor.lean
+│       ├── ProperPrefix.lean
+│       ├── ProperSuffix.lean
+│       ├── Border.lean
+│       ├── Period.lean
+│       ├── Conjugacy.lean
+│       └── Morphism.lean
+│
+├── repl/                  # Lean REPL (submodule)
+│
+├── logs/                  # ★ Full raw evaluation logs (complete release)
+│   ├── Claude/
+│   │   ├── log_cow_batch1_claude.txt
+│   │   ├── log_cow_batch2_claude.txt
+│   │   └── log_minif2f_claude.txt
+│   ├── Kimi/
+│   │   ├── log_cow_batch1_kimi.txt
+│   │   ├── log_cow_batch2_kimi.txt
+│   │   └── log_minif2f_kimi.txt
+│   └── Deepseek/
+│       ├── log_cow_batch1_deepseek.txt
+│       ├── log_cow_batch2_deepseek.txt
+│       └── log_minif2f_deepseek.txt
+│
+├── evaluation_suite.json  # ★ Full 90-theorem evaluation suite (complete release)
+├── metadata.json          # ★ Full CoW semantic ontology (complete release)
+│
+├── run_example.py         # Quick-start: 3 theorems end-to-end
+└── benchmark.py           # Mini benchmark: 5 theorems
+```
 
 ---
 
@@ -275,81 +365,40 @@ The LSP and ontology tools are purely local.
 The `verify_lean4_file()` function (subprocess-based REPL interface) is derived from
 that codebase with minor modifications for single-threaded use.
 
-### CoW Ontology (`metadata.json`)
+### CoW Library & Ontology
 
-`metadata.json` was produced as part of the LAMP research and encodes the semantic
-relationships between CoW definitions and theorems. It is not independently authored -
-it was constructed semi-automatically from the CoW Lean library during the LAMP study.
-
----
-
-## Project Structure
-
-```
-LAMP_mini/
-├── README.md              # This file
-├── .env.example           # API key template (copy to .env)
-├── .gitignore
-├── requirements.txt
-│
-├── orchestrator.py        # Planner → Builder → Verifier loop
-├── planner.py             # Strategic reasoning agent
-├── builder.py             # Lean 4 code generation agent
-├── verifier.py            # Lean REPL verifier (adopted from DeepSeek)
-├── mcp_tools.py           # Tool schemas and MCP client wrappers
-│
-├── llm/
-│   ├── claude.py          # Anthropic Claude backend
-│   ├── kimi.py            # Moonshot Kimi K2 backend
-│   └── deepseek.py        # DeepSeek backend
-│
-├── CoW/                   # Lean 4 CoW library (mini subset)
-│   ├── lakefile.toml
-│   ├── lean-toolchain     # Pins Lean 4 v4.17.0
-│   ├── CoW.lean           # Root import
-│   └── CoW/
-│       ├── Word.lean
-│       ├── Factor.lean
-│       ├── ProperPrefix.lean
-│       ├── ProperSuffix.lean
-│       ├── Border.lean
-│       ├── Period.lean
-│       ├── Conjugacy.lean  
-│       ├── Morphism.lean   
-│       └── Squares.lean    
-│
-├── repl/                  # Lean REPL 
-│
-├── run_example.py         # Quick-start: 3 theorems end-to-end
-├── benchmark.py           # Full mini benchmark: 5 theorems
-└── metadata.json          # CoW ontology (see Attribution)
-```
+The `CoW/` Lean library and `metadata.json` ontology were developed as original research
+contributions of the LAMP project. They encode the foundational formalization of
+Combinatorics on Words in Lean 4, a domain currently without Mathlib coverage.
 
 ---
 
 ## Troubleshooting
 
-**`lake: command not found`**  
+**`lake: command not found`**
 → Run `source ~/.elan/env` or restart your shell after installing elan.
 
-**`lean-explore: command not found`**  
+**`lean-explore: command not found`**
 → The LeanExplore tool is optional. If not installed, `search_lean_explore` will timeout
   and fall back gracefully. Install with `pip install lean-explore` or set `LEAN_EXPLORE_API_KEY`
   to use the cloud backend.
 
-**`lean-lsp-mcp: command not found`**  
+**`lean-lsp-mcp: command not found`**
 → The LSP tool is optional. Install with `pip install lean-lsp-mcp`. Without it,
-  `get_lean_goal_state` returns a graceful error and the Builder falls back to context-based reasoning.
+  `get_lean_goal_state` returns a graceful error and the Builder falls back to context-based
+  reasoning.
 
-**Lean REPL times out**  
+**Lean REPL times out**
 → First-time import compilation can take several minutes. Increase the `timeout` parameter
   in `verify_lean4_file()` calls if needed (default: 30s per theorem attempt).
 
-**API rate limits**  
+**API rate limits**
 → All LLM clients implement exponential backoff. For Claude: 5 retries with base delay 10s.
   For Kimi/DeepSeek: 5 retries with base delay 5s.
 
 ---
 
-*LAMP_mini is a stripped version of the original LAMP system. The full system, evaluation suite, and
-experimental results are described in the accompanying paper.*
+*The LAMP framework code in this repository is a stripped-down, portable version of the full system.
+The full CoW formalization library, evaluation suite, semantic ontology, and raw evaluation logs
+are released in their entirety. Full experimental details and ablation study results are described
+in the accompanying paper.*

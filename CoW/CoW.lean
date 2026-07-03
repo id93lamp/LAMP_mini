@@ -1,5 +1,3 @@
--- Note: This is a simplified, stripped-down version of the CoW library and is not complete.
-
 import CoW.Word
 import CoW.Factor
 import CoW.ProperPrefix
@@ -8,26 +6,23 @@ import CoW.Period
 import CoW.Border
 import CoW.Morphism
 import CoW.Conjugacy
-import CoW.Squares
 
 /-!
-# CoW — Combinatorics on Words  (LAMP_mini subset)
+# CoW — Combinatorics on Words
 
-Root import file.  Import this to get the full mini library.
-
-> **Note**: This is a reduced subset for the LAMP_mini reviewer package.
+Root import file.  Import this to get the full library.
 
 ## Module structure
 
-| File           | Contents                                               |
-|----------------|--------------------------------------------------------|
-| `Word`         | `Word α`, monoid, length, power                        |
-| `Factor`       | IsPrefix, IsSuffix, IsFactor                           |
-| `ProperPrefix` | IsProperPrefix and properties                          |
-| `ProperSuffix` | IsProperSuffix and properties                          |
-| `Period`       | HasPeriod, IsMinimalPeriod, IsPrimitive                |
-| `Border`       | IsBorder, IsUnbordered, IsLongestBorder                |
-| `Morphism`     | applyMorphism (stub — 2 lemmas)                        |
-| `Conjugacy`    | IsConjugate (stub — 2 lemmas)                          |
-| `Squares`      | IsSquare (stub — definition only)                      |
+| File             | Contents                                                 |
+|------------------|----------------------------------------------------------|
+| `Word`           | `Word α`, monoid, length, power                          |
+| `Factor`         | Prefix, Suffix, Factor, IsFactorClosed                   |
+| `ProperPrefix`   | Proper prefix definition and properties                  |
+| `ProperSuffix`   | Proper suffix definition and properties                  |
+| `Period`         | HasPeriod, IsMinimalPeriod, HasModularPeriod, IsPrimitive, IsPrimitiveRoot |
+| `Border`         | IsBorder, IsUnbordered, longest border, border chain     |
+| `Morphism`       | applyMorphism, compMorphism, IsNonErasing, IsCoding, IsUniform |
+| `Conjugacy`      | IsConjugate, conjugacy equivalence                       |
+| `Squares`        | IsSquare, distinctSquares, Fraenkel-Simpson primitives   |
 -/

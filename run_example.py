@@ -4,10 +4,10 @@ run_example.py — LAMP_mini Quick-Start
 Runs 3 theorems through the full LAMP_mini pipeline and prints each step's output.
 This is the recommended first script to run after setup.
 
-Theorems selected:
+Theorems selected from evaluation_suite.json file: 
   1. word_length_eq_zero_iff   (Easy)   — smoke test
   2. prefix_antisymm           (Medium) — length reasoning + antisymmetry
-  3. border_of_border_is_border (Hard)  — transitivity of borders
+  3. border_of_border_is_border (Hard)  — transitivity of borders 
 
 Usage:
     python run_example.py
@@ -21,6 +21,8 @@ Prerequisites:
 import os
 import sys
 import time
+import json
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,56 +30,26 @@ load_dotenv()
 from orchestrator import LAMPOrchestrator
 from verifier import verify_lean4_file, parse_lean_result
 
-# ── Shared Lean imports ───────────────────────────────────────────────────────
-IMPORTS = """\
-import CoW.Word
-import CoW.Factor
-import CoW.ProperPrefix
-import CoW.ProperSuffix
-import CoW.Border
-import CoW.Period
-import Mathlib.Data.List.Basic
-import Mathlib.Data.Nat.Basic
+# ── Load Examples from Evaluation Suite ───────────────────────────────────────
+EXAMPLE_DESCRIPTIONS = {
+    "word_length_eq_zero_iff": "A word has length 0 iff it is the empty list.",
+    "prefix_antisymm": "Prefix order is antisymmetric.",
+    "border_of_border_is_border": "Border relation is transitive: a border of a border is a border."
+}
 
-namespace CoW
-variable {α : Type*}
-"""
-NS_END = "\nend CoW"
+SUITE_PATH = Path(__file__).parent / "evaluation_suite.json"
+with open(SUITE_PATH) as f:
+    ALL_SUITE_THEOREMS = json.load(f)
 
-# ── 3 example theorems ────────────────────────────────────────────────────────
-EXAMPLES = [
-    {
-        "name": "word_length_eq_zero_iff",
-        "difficulty": "EASY",
-        "description": "A word has length 0 iff it is the empty list.",
-        "statement": """\
-theorem word_length_eq_zero_iff (w : Word α) :
-    w.length = 0 ↔ w = [] := by
-  sorry
-""",
-    },
-    {
-        "name": "prefix_antisymm",
-        "difficulty": "MEDIUM",
-        "description": "Prefix order is antisymmetric.",
-        "statement": """\
-theorem prefix_antisymm {u w : Word α} (h1 : u ≤ₚ w) (h2 : w ≤ₚ u) :
-    u = w := by
-  sorry
-""",
-    },
-    {
-        "name": "border_of_border_is_border",
-        "difficulty": "HARD",
-        "description": "Border relation is transitive: a border of a border is a border.",
-        "statement": """\
-theorem border_of_border_is_border {b₁ b₂ w : Word α}
-    (h1 : IsBorder b₁ b₂) (h2 : IsBorder b₂ w) :
-    IsBorder b₁ w := by
-  sorry
-""",
-    },
-]
+EXAMPLES = []
+for name, desc in EXAMPLE_DESCRIPTIONS.items():
+    match = next((t for t in ALL_SUITE_THEOREMS if t["name"] == name), None)
+    if match:
+        ex_entry = dict(match)
+        ex_entry["description"] = desc
+        EXAMPLES.append(ex_entry)
+    else:
+        raise ValueError(f"Theorem {name} not found in evaluation_suite.json")
 
 LEAN_WORKSPACE = "CoW/"
 
@@ -115,13 +87,12 @@ def run_example():
         max_build_attempts=3,
         lean_workspace=LEAN_WORKSPACE,
     )
-
     all_passed = True
     for i, ex in enumerate(EXAMPLES, 1):
         name = ex["name"]
         diff = ex["difficulty"]
         desc = ex["description"]
-        lean_code = f"{IMPORTS}\n{ex['statement']}\n{NS_END}"
+        lean_code = f"{ex['imports']}\n{ex['statement']}\nend CoW"
 
         print(f"\n{'─' * 65}")
         print(f"[{i}/3] {name}  [{diff}]")

@@ -1,16 +1,9 @@
 """
 CoW Mini Benchmark — 5 Theorems
 ================================
-A representative subset of the full 90-theorem CoW evaluation suite,
-selected for the LAMP_mini reviewer package.
+The 5 theorems are loaded from the evaluation_suite.json file.Changing the benchmark names in the 
+ BENCHMARK_NAMES list will run a different set of theorems.
 
-Each theorem is a self-contained Lean 4 code string with `sorry` as the
-proof placeholder.  The LAMP orchestrator replaces each `sorry` with a
-verified proof.
-
-NOTE: This mini suite is NOT representative of the full system's capability.
-See the paper and the complete LAMP repository for the full 90-theorem
-evaluation results.
 """
 
 import time
@@ -21,97 +14,33 @@ from pathlib import Path
 from orchestrator import LAMPOrchestrator
 from verifier import verify_lean4_file, parse_lean_result
 
-# ── Common imports ────────────────────────────────────────────────────────────
+# ── Load Theorems from Evaluation Suite ───────────────────────────────────────
 
-COMMON_IMPORTS = """\
-import CoW.Word
-import CoW.Factor
-import CoW.ProperPrefix
-import CoW.ProperSuffix
-import CoW.Border
-import CoW.Period
-import Mathlib.Data.List.Basic
-import Mathlib.Data.Nat.Basic
+SUITE_PATH = Path(__file__).parent / "evaluation_suite.json"
+with open(SUITE_PATH) as f:
+    ALL_SUITE_THEOREMS = json.load(f)
 
-namespace CoW
-variable {α : Type*}
-"""
-
-NAMESPACE_END = "\nend CoW"
-
-
-def make_theorem(statement: str, imports: str = COMMON_IMPORTS) -> str:
-    """Wrap a theorem statement in a complete Lean 4 file."""
-    return f"{imports}\n{statement}\n{NAMESPACE_END}"
-
-
-# ── 5 Benchmark Theorems ──────────────────────────────────────────────────────
-# Distribution: 2 Easy · 2 Medium · 1 Hard
-# Modules: Word (1), Factor (2), ProperPrefix (1), Border (1)
-
-BENCHMARK_THEOREMS = [
-
-    # ── Word (Easy) ──────────────────────────────────────────────────────────
-    {
-        "name": "word_length_eq_zero_iff",
-        "difficulty": "EASY",
-        "module": "Word",
-        "statement": """\
-theorem word_length_eq_zero_iff (w : Word α) :
-    w.length = 0 ↔ w = [] := by
-  sorry
-""",
-    },
-
-    # ── Factor (Easy) ─────────────────────────────────────────────────────────
-    {
-        "name": "prefix_of_concat",
-        "difficulty": "EASY",
-        "module": "Factor",
-        "statement": """\
-theorem prefix_of_concat (u v : Word α) :
-    u ≤ₚ (u ⬝ v) := by
-  sorry
-""",
-    },
-
-    # ── Factor (Medium) ───────────────────────────────────────────────────────
-    {
-        "name": "prefix_antisymm",
-        "difficulty": "MEDIUM",
-        "module": "Factor",
-        "statement": """\
-theorem prefix_antisymm {u w : Word α} (h1 : u ≤ₚ w) (h2 : w ≤ₚ u) :
-    u = w := by
-  sorry
-""",
-    },
-
-    # ── ProperPrefix (Medium) ─────────────────────────────────────────────────
-    {
-        "name": "proper_prefix_trans",
-        "difficulty": "MEDIUM",
-        "module": "ProperPrefix",
-        "statement": """\
-theorem proper_prefix_trans {u v w : Word α}
-    (huv : u <ₚ v) (hvw : v <ₚ w) : u <ₚ w := by
-  sorry
-""",
-    },
-
-    # ── Border (Hard) ─────────────────────────────────────────────────────────
-    {
-        "name": "border_of_border_is_border",
-        "difficulty": "HARD",
-        "module": "Border",
-        "statement": """\
-theorem border_of_border_is_border {b₁ b₂ w : Word α}
-    (h1 : IsBorder b₁ b₂) (h2 : IsBorder b₂ w) :
-    IsBorder b₁ w := by
-  sorry
-""",
-    },
+BENCHMARK_NAMES = [
+    "word_length_eq_zero_iff",
+    "prefix_of_concat",
+    "prefix_antisymm",
+    "proper_prefix_trans",
+    "border_of_border_is_border"
 ]
+
+BENCHMARK_THEOREMS = []
+for name in BENCHMARK_NAMES:
+    match = next((t for t in ALL_SUITE_THEOREMS if t["name"] == name), None)
+    if match:
+        BENCHMARK_THEOREMS.append(match)
+    else:
+        raise ValueError(f"Theorem {name} not found in evaluation_suite.json")
+
+
+def make_theorem(statement: str, imports: str) -> str:
+    """Wrap a theorem statement in a complete Lean 4 file."""
+    return f"{imports}\n{statement}\nend CoW"
+
 
 
 # ── Evaluation runner ─────────────────────────────────────────────────────────
@@ -136,12 +65,11 @@ def run_benchmark(lean_workspace: str = "CoW/", output_dir: str = "verified_proo
     print(f"  LAMP_mini CoW Benchmark — {total} Theorems")
     print(f"  (NOT representative of full system — see paper for full results)")
     print(f"{'=' * 65}\n")
-
     for i, thm in enumerate(BENCHMARK_THEOREMS, 1):
         name = thm["name"]
         diff = thm["difficulty"]
         module = thm["module"]
-        lean_code = make_theorem(thm["statement"])
+        lean_code = make_theorem(thm["statement"], thm["imports"])
 
         print(f"[{i:2d}/{total}] {module:>14s} | {diff:>6s} | {name}")
 

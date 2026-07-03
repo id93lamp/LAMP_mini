@@ -1,0 +1,632 @@
+[
+  {
+    "name": "word_length_eq_zero_iff",
+    "difficulty": "EASY",
+    "module": "Word",
+    "statement": "theorem word_length_eq_zero_iff (w : Word \u03b1) :\n    w.length = 0 \u2194 w = [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "word_length_pos_of_ne_nil",
+    "difficulty": "EASY",
+    "module": "Word",
+    "statement": "theorem word_length_pos_of_ne_nil {w : Word \u03b1} (hw : w \u2260 []) :\n    0 < w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "word_concat_right_cancel",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem word_concat_right_cancel {u v w : Word \u03b1} (h : u \u2b1d w = v \u2b1d w) :\n    u = v := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "word_concat_left_cancel",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem word_concat_left_cancel {u v w : Word \u03b1} (h : w \u2b1d u = w \u2b1d v) :\n    u = v := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "word_pow_two_length",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem word_pow_two_length (w : Word \u03b1) :\n    (w ^ 2).length = 2 * w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "word_pow_succ_left",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem word_pow_succ_left (w : Word \u03b1) (n : \u2115) :\n    w ^ (n + 1) = w \u2b1d w ^ n := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_of_concat",
+    "difficulty": "EASY",
+    "module": "Factor",
+    "statement": "theorem prefix_of_concat (u v : Word \u03b1) :\n    u \u2264\u209a (u \u2b1d v) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "suffix_of_concat",
+    "difficulty": "EASY",
+    "module": "Factor",
+    "statement": "theorem suffix_of_concat (u v : Word \u03b1) :\n    v \u2264\u209b (u \u2b1d v) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_antisymm",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem prefix_antisymm {u w : Word \u03b1} (h1 : u \u2264\u209a w) (h2 : w \u2264\u209a u) :\n    u = w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "suffix_antisymm",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem suffix_antisymm {u w : Word \u03b1} (h1 : u \u2264\u209b w) (h2 : w \u2264\u209b u) :\n    u = w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_of_factor_is_factor",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem prefix_of_factor_is_factor {u v w : Word \u03b1}\n    (hpre : u \u2264\u209a v) (hfac : v \u2264f w) : u \u2264f w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "suffix_of_factor_is_factor",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem suffix_of_factor_is_factor {u v w : Word \u03b1}\n    (hsuf : u \u2264\u209b v) (hfac : v \u2264f w) : u \u2264f w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_concat_right",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem prefix_concat_right {u v w : Word \u03b1} (h : u \u2264\u209a w) :\n    u \u2264\u209a (w \u2b1d v) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "suffix_concat_left",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem suffix_concat_left {u v w : Word \u03b1} (h : u \u2264\u209b w) :\n    u \u2264\u209b (v \u2b1d w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_irrefl",
+    "difficulty": "EASY",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_irrefl (w : Word \u03b1) : \u00ac (w <\u209a w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_ne",
+    "difficulty": "EASY",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_ne {u w : Word \u03b1} (h : u <\u209a w) : u \u2260 w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_lt_of_length_lt",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem prefix_lt_of_length_lt {u w : Word \u03b1} (hpre : u \u2264\u209a w)\n    (hlt : u.length < w.length) : u <\u209a w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_trans",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_trans {u v w : Word \u03b1}\n    (huv : u <\u209a v) (hvw : v <\u209a w) : u <\u209a w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_concat_ne_nil",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_concat_ne_nil {u v : Word \u03b1} (hv : v \u2260 []) :\n    u <\u209a (u \u2b1d v) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_irrefl",
+    "difficulty": "EASY",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_irrefl (w : Word \u03b1) : \u00ac (w <\u209b w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_ne",
+    "difficulty": "EASY",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_ne {u w : Word \u03b1} (h : u <\u209b w) : u \u2260 w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "suffix_lt_of_length_lt",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem suffix_lt_of_length_lt {u w : Word \u03b1} (hsuf : u \u2264\u209b w)\n    (hlt : u.length < w.length) : u <\u209b w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_trans",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_trans {u v w : Word \u03b1}\n    (huv : u <\u209b v) (hvw : v <\u209b w) : u <\u209b w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_concat_ne_nil",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_concat_ne_nil {u v : Word \u03b1} (hv : v \u2260 []) :\n    u <\u209b (v \u2b1d u) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_is_proper_prefix",
+    "difficulty": "EASY",
+    "module": "Border",
+    "statement": "theorem border_is_proper_prefix {b w : Word \u03b1} (h : IsBorder b w) :\n    b <\u209a w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_is_proper_suffix",
+    "difficulty": "EASY",
+    "module": "Border",
+    "statement": "theorem border_is_proper_suffix {b w : Word \u03b1} (h : IsBorder b w) :\n    b <\u209b w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_ne_word",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem border_ne_word {b w : Word \u03b1} (h : IsBorder b w) :\n    b \u2260 w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_empty_iff",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem border_empty_iff (w : Word \u03b1) :\n    IsBorder ([] : Word \u03b1) w \u2194 w \u2260 [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "longest_border_length_unique",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem longest_border_length_unique {b\u2081 b\u2082 w : Word \u03b1}\n    (h1 : IsLongestBorder b\u2081 w) (h2 : IsLongestBorder b\u2082 w) :\n    b\u2081.length = b\u2082.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_of_border_is_border",
+    "difficulty": "HARD",
+    "module": "Border",
+    "statement": "theorem border_of_border_is_border {b\u2081 b\u2082 w : Word \u03b1}\n    (h1 : IsBorder b\u2081 b\u2082) (h2 : IsBorder b\u2082 w) :\n    IsBorder b\u2081 w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_concat",
+    "difficulty": "EASY",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_concat (u v : Word \u03b1) :\n    (u \u2b1d v) ~ (v \u2b1d u) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_of_eq",
+    "difficulty": "EASY",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_of_eq {u v : Word \u03b1} (h : u = v) :\n    u ~ v := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_symm_iff",
+    "difficulty": "MEDIUM",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_symm_iff {u v : Word \u03b1} :\n    u ~ v \u2194 v ~ u := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_trans",
+    "difficulty": "HARD",
+    "module": "Conjugacy",
+    "statement": "/-- Transitivity of conjugacy. Requires Levi's lemma (List.append_eq_append_iff). -/\ntheorem conjugate_trans {u v w : Word \u03b1}\n    (h1 : u ~ v) (h2 : v ~ w) : u ~ w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "primitive_length_pos",
+    "difficulty": "EASY",
+    "module": "Period",
+    "statement": "theorem primitive_length_pos {w : Word \u03b1} (h : IsPrimitive w) :\n    0 < w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "hasPeriod_of_short",
+    "difficulty": "EASY",
+    "module": "Period",
+    "statement": "theorem hasPeriod_of_short {w : Word \u03b1} {p : \u2115}\n    (hw : w.length \u2264 1) (hp : 0 < p) : HasPeriod w p := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "isPrimitive_of_length_one",
+    "difficulty": "MEDIUM",
+    "module": "Period",
+    "statement": "theorem isPrimitive_of_length_one {w : Word \u03b1} (h : w.length = 1) :\n    IsPrimitive w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "minimalPeriod_unique",
+    "difficulty": "MEDIUM",
+    "module": "Period",
+    "statement": "theorem minimalPeriod_unique {w : Word \u03b1} {p q : \u2115}\n    (hp : IsMinimalPeriod w p) (hq : IsMinimalPeriod w q) :\n    p = q := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "primitive_minimal_period_is_length",
+    "difficulty": "HARD",
+    "module": "Period",
+    "statement": "/-- A primitive word's minimal period equals its length. -/\ntheorem primitive_minimal_period_is_length {w : Word \u03b1}\n    (hprim : IsPrimitive w) (hlen : w.length \u2265 2) :\n    IsMinimalPeriod w w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "morphism_cons",
+    "difficulty": "EASY",
+    "module": "Morphism",
+    "statement": "theorem morphism_cons (f : \u03b1 \u2192 Word \u03b2) (a : \u03b1) (u : Word \u03b1) :\n    f \u2022w (a :: u) = (f a) \u2b1d (f \u2022w u) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "coding_preserves_length",
+    "difficulty": "MEDIUM",
+    "module": "Morphism",
+    "statement": "theorem coding_preserves_length {f : \u03b1 \u2192 Word \u03b2} (hf : IsCoding f) (w : Word \u03b1) :\n    (f \u2022w w).length = w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "identity_morphism",
+    "difficulty": "MEDIUM",
+    "module": "Morphism",
+    "statement": "theorem identity_morphism (w : Word \u03b1) :\n    (fun a => Word.letter a) \u2022w w = w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "nonErasing_preserves_ne_empty",
+    "difficulty": "MEDIUM",
+    "module": "Morphism",
+    "statement": "theorem nonErasing_preserves_ne_empty {f : \u03b1 \u2192 Word \u03b2}\n    (hf : IsNonErasing f) {w : Word \u03b1} (hw : w \u2260 []) :\n    f \u2022w w \u2260 [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "uniform_pow_length",
+    "difficulty": "MEDIUM",
+    "module": "Morphism",
+    "statement": "theorem uniform_pow_length {f : \u03b1 \u2192 Word \u03b2} {k : \u2115}\n    (hf : IsUniform f k) (w : Word \u03b1) (n : \u2115) :\n    (f \u2022w (w ^ n)).length = n * w.length * k := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "comp_nonErasing",
+    "difficulty": "HARD",
+    "module": "Morphism",
+    "statement": "theorem comp_nonErasing {f : \u03b1 \u2192 Word \u03b2} {g : \u03b2 \u2192 Word \u03b3}\n    (hf : IsNonErasing f) (hg : IsNonErasing g) :\n    IsNonErasing (compMorphism g f) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "pow_ne_empty_of_ne_empty",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem pow_ne_empty_of_ne_empty {w : Word \u03b1} (hw : w \u2260 []) {n : \u2115} (hn : 0 < n) :\n    w ^ n \u2260 [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "concat_eq_nil_iff",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem concat_eq_nil_iff (u v : Word \u03b1) :\n    u \u2b1d v = [] \u2194 u = [] \u2227 v = [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "pow_eq_nil_iff",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem pow_eq_nil_iff (w : Word \u03b1) (n : \u2115) :\n    w ^ n = [] \u2194 (n = 0 \u2228 w = []) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "pow_comm_concat",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem pow_comm_concat (w : Word \u03b1) (m n : \u2115) :\n    w ^ m \u2b1d w ^ n = w ^ n \u2b1d w ^ m := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "pow_injective_of_ne_empty",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem pow_injective_of_ne_empty {w : Word \u03b1} (hw : w \u2260 []) {m n : \u2115}\n    (h : w ^ m = w ^ n) : m = n := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "pow_add_length_eq",
+    "difficulty": "MEDIUM",
+    "module": "Word",
+    "statement": "theorem pow_add_length_eq (w : Word \u03b1) (m n : \u2115) :\n    (w ^ (m + n)).length = (w ^ m).length + (w ^ n).length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "factor_of_concat_left",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem factor_of_concat_left {u w : Word \u03b1} (h : u \u2264f w) (v : Word \u03b1) :\n    u \u2264f (w \u2b1d v) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "factor_of_concat_right",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem factor_of_concat_right {u w : Word \u03b1} (h : u \u2264f w) (v : Word \u03b1) :\n    u \u2264f (v \u2b1d w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_of_pow_succ",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem prefix_of_pow_succ (w : Word \u03b1) (n : \u2115) :\n    w \u2264\u209a w ^ (n + 1) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_eq_of_length_eq",
+    "difficulty": "HARD",
+    "module": "Factor",
+    "statement": "theorem prefix_eq_of_length_eq {u v w : Word \u03b1}\n    (hu : u \u2264\u209a w) (hv : v \u2264\u209a w) (hlen : u.length = v.length) :\n    u = v := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_of_pow_le",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem prefix_of_pow_le (w : Word \u03b1) {m n : \u2115} (h : m \u2264 n) :\n    w ^ m \u2264\u209a w ^ n := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "suffix_of_pow_le",
+    "difficulty": "MEDIUM",
+    "module": "Factor",
+    "statement": "theorem suffix_of_pow_le (w : Word \u03b1) {m n : \u2115} (h : m \u2264 n) :\n    w ^ m \u2264\u209b w ^ n := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "prefix_suffix_concat_partition",
+    "difficulty": "HARD",
+    "module": "Factor",
+    "statement": "theorem prefix_suffix_concat_partition {u v w : Word \u03b1}\n    (hpre : u \u2264\u209a w) (hsuf : v \u2264\u209b w) (hlen : u.length + v.length = w.length) :\n    w = u \u2b1d v := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_of_prefix_of_proper_prefix",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_of_prefix_of_proper_prefix {u v w : Word \u03b1}\n    (huv : u \u2264\u209a v) (hvw : v <\u209a w) : u <\u209a w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_of_proper_prefix_of_prefix",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_of_proper_prefix_of_prefix {u v w : Word \u03b1}\n    (huv : u <\u209a v) (hvw : v \u2264\u209a w) : u <\u209a w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_witness",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_witness {u w : Word \u03b1} (h : u <\u209a w) :\n    \u2203 v, v \u2260 [] \u2227 w = u \u2b1d v := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_witness_is_suffix",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_witness_is_suffix {u w : Word \u03b1} (h : u <\u209a w) :\n    \u2203 v, v \u2260 [] \u2227 w = u \u2b1d v \u2227 v \u2264\u209b w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_prefix_double_lt",
+    "difficulty": "MEDIUM",
+    "module": "ProperPrefix",
+    "statement": "theorem proper_prefix_double_lt {u v w : Word \u03b1}\n    (h1 : u <\u209a v) (h2 : v <\u209a w) : u.length + 2 \u2264 w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_of_suffix_of_proper_suffix",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_of_suffix_of_proper_suffix {u v w : Word \u03b1}\n    (huv : u \u2264\u209b v) (hvw : v <\u209b w) : u <\u209b w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_of_proper_suffix_of_suffix",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_of_proper_suffix_of_suffix {u v w : Word \u03b1}\n    (huv : u <\u209b v) (hvw : v \u2264\u209b w) : u <\u209b w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_witness",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_witness {u w : Word \u03b1} (h : u <\u209b w) :\n    \u2203 v, v \u2260 [] \u2227 w = v \u2b1d u := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_witness_is_prefix",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_witness_is_prefix {u w : Word \u03b1} (h : u <\u209b w) :\n    \u2203 v, v \u2260 [] \u2227 w = v \u2b1d u \u2227 v \u2264\u209a w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "proper_suffix_double_lt",
+    "difficulty": "MEDIUM",
+    "module": "ProperSuffix",
+    "statement": "theorem proper_suffix_double_lt {u v w : Word \u03b1}\n    (h1 : u <\u209b v) (h2 : v <\u209b w) : u.length + 2 \u2264 w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "not_unbordered_iff_exists_nonempty_border",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem not_unbordered_iff_exists_nonempty_border (w : Word \u03b1) :\n    \u00ac IsUnbordered w \u2194 \u2203 b, IsBorder b w \u2227 b \u2260 [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "not_border_of_length_ge",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem not_border_of_length_ge {b w : Word \u03b1} (hlen : b.length \u2265 w.length) :\n    \u00ac IsBorder b w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_of_prefix_suffix",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem border_of_prefix_suffix {u w : Word \u03b1}\n    (hpre : u \u2264\u209a w) (hsuf : u \u2264\u209b w) (hlt : u.length < w.length) :\n    IsBorder u w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_nonempty_implies_length_ge_two",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem border_nonempty_implies_length_ge_two {b w : Word \u03b1}\n    (hb : IsBorder b w) (hne : b \u2260 []) : 2 \u2264 w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_period_duality",
+    "difficulty": "HARD",
+    "module": "Border",
+    "statement": "theorem border_period_duality {b w : Word \u03b1} (h : IsBorder b w) :\n    HasPeriod w (w.length - b.length) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "border_imp_not_unbordered",
+    "difficulty": "MEDIUM",
+    "module": "Border",
+    "statement": "theorem border_imp_not_unbordered {b w : Word \u03b1} (h : IsBorder b w) (hne : b \u2260 []) :\n    \u00ac IsUnbordered w := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_empty_iff",
+    "difficulty": "MEDIUM",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_empty_iff {u : Word \u03b1} (h : u ~ ([] : Word \u03b1)) :\n    u = [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_concat_rotate",
+    "difficulty": "MEDIUM",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_concat_rotate (u v w : Word \u03b1) :\n    (u \u2b1d v \u2b1d w) ~ (v \u2b1d w \u2b1d u) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_preserves_ne_empty",
+    "difficulty": "MEDIUM",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_preserves_ne_empty {u v : Word \u03b1}\n    (h : u ~ v) (hu : u \u2260 []) : v \u2260 [] := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_pow_rotate",
+    "difficulty": "MEDIUM",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_pow_rotate (w : Word \u03b1) (n : \u2115) :\n    w ^ (n + 1) ~ w \u2b1d w ^ n := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "conjugate_pow_of_conjugate",
+    "difficulty": "HARD",
+    "module": "Conjugacy",
+    "statement": "theorem conjugate_pow_of_conjugate {u v : Word \u03b1} (h : u ~ v) (n : \u2115) :\n    u ^ n ~ v ^ n := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "pow_two_not_primitive",
+    "difficulty": "MEDIUM",
+    "module": "Period",
+    "statement": "theorem pow_two_not_primitive {w : Word \u03b1} (hw : w \u2260 []) :\n    \u00ac IsPrimitive (w \u2b1d w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "hasPeriod_concat_self",
+    "difficulty": "HARD",
+    "module": "Period",
+    "statement": "theorem hasPeriod_concat_self {w : Word \u03b1} (hw : w \u2260 []) :\n    HasPeriod (w \u2b1d w) w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "hasPeriod_mul_of_hasPeriod",
+    "difficulty": "HARD",
+    "module": "Period",
+    "statement": "theorem hasPeriod_mul_of_hasPeriod {w : Word \u03b1} {p : \u2115}\n    (hp : HasPeriod w p) {k : \u2115} (hk : 1 \u2264 k) :\n    HasPeriod w (k * p) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "period_of_prefix",
+    "difficulty": "HARD",
+    "module": "Period",
+    "statement": "theorem period_of_prefix {w u : Word \u03b1} {p : \u2115}\n    (hp : HasPeriod w p) (hpre : u \u2264\u209a w) (hlen : p \u2264 u.length) :\n    HasPeriod u p := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "hasPeriod_pow_length",
+    "difficulty": "HARD",
+    "module": "Period",
+    "statement": "theorem hasPeriod_pow_length {w : Word \u03b1} (hw : w \u2260 []) (n : \u2115) :\n    HasPeriod (w ^ (n + 1)) w.length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 : Type*}"
+  },
+  {
+    "name": "morphism_length_cons",
+    "difficulty": "MEDIUM",
+    "module": "Morphism",
+    "statement": "theorem morphism_length_cons (f : \u03b1 \u2192 Word \u03b2) (a : \u03b1) (u : Word \u03b1) :\n    (f \u2022w (a :: u)).length = (f a).length + (f \u2022w u).length := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "coding_comp_coding",
+    "difficulty": "HARD",
+    "module": "Morphism",
+    "statement": "theorem coding_comp_coding {f : \u03b1 \u2192 Word \u03b2} {g : \u03b2 \u2192 Word \u03b3}\n    (hf : IsCoding f) (hg : IsCoding g) :\n    IsCoding (compMorphism g f) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "uniform_comp",
+    "difficulty": "HARD",
+    "module": "Morphism",
+    "statement": "theorem uniform_comp {f : \u03b1 \u2192 Word \u03b2} {g : \u03b2 \u2192 Word \u03b3} {j k : \u2115}\n    (hf : IsUniform f j) (hg : IsUniform g k) :\n    IsUniform (compMorphism g f) (j * k) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "morphism_preserves_proper_prefix_ne",
+    "difficulty": "HARD",
+    "module": "Morphism",
+    "statement": "theorem morphism_preserves_proper_prefix_ne {f : \u03b1 \u2192 Word \u03b2}\n    (hf : IsNonErasing f) {u w : Word \u03b1} (h : u <\u209a w) :\n    (f \u2022w u) <\u209a (f \u2022w w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "morphism_preserves_proper_suffix_ne",
+    "difficulty": "HARD",
+    "module": "Morphism",
+    "statement": "theorem morphism_preserves_proper_suffix_ne {f : \u03b1 \u2192 Word \u03b2}\n    (hf : IsNonErasing f) {u w : Word \u03b1} (h : u <\u209b w) :\n    (f \u2022w u) <\u209b (f \u2022w w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  },
+  {
+    "name": "border_preserved_by_coding",
+    "difficulty": "HARD",
+    "module": "Morphism",
+    "statement": "theorem border_preserved_by_coding {f : \u03b1 \u2192 Word \u03b2} {b w : Word \u03b1}\n    (hb : IsBorder b w) (hf : IsCoding f) :\n    IsBorder (f \u2022w b) (f \u2022w w) := by\n  sorry",
+    "imports": "import CoW.Word\nimport CoW.Factor\nimport CoW.ProperPrefix\nimport CoW.ProperSuffix\nimport CoW.Border\nimport CoW.Conjugacy\nimport CoW.Period\nimport CoW.Morphism\nimport Mathlib.Data.List.Basic\nimport Mathlib.Data.Nat.Basic\nimport Mathlib.Tactic.Ring\n\nnamespace CoW\nvariable {\u03b1 \u03b2 \u03b3 : Type*}"
+  }
+]
